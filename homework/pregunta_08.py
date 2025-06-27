@@ -6,7 +6,28 @@ utilizar pandas, numpy o scipy.
 """
 
 
+import csv
+import os
+
 def pregunta_08():
+    base_path = os.path.dirname(os.path.dirname(__file__))
+    full_path = os.path.join(base_path, "files", "input", "data.csv")
+
+    with open(full_path, newline='', encoding='utf-8') as f:
+        rows = list(csv.reader(f, delimiter='\t'))
+
+    asociaciones = {}
+
+    for row in rows:
+        letra = row[0]
+        numero = int(row[1])
+        if numero not in asociaciones:
+            asociaciones[numero] = set()
+        asociaciones[numero].add(letra)
+
+    resultado = [(numero, sorted(list(letras))) for numero, letras in sorted(asociaciones.items())]
+    return resultado
+
     """
     Genere una lista de tuplas, donde el primer elemento de cada tupla
     contiene  el valor de la segunda columna; la segunda parte de la tupla

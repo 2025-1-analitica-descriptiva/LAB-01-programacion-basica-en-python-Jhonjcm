@@ -6,7 +6,26 @@ utilizar pandas, numpy o scipy.
 """
 
 
+import csv
+import os
+
 def pregunta_10():
+    base_path = os.path.dirname(os.path.dirname(__file__))
+    full_path = os.path.join(base_path, "files", "input", "data.csv")
+
+    with open(full_path, newline='', encoding='utf-8') as f:
+        rows = list(csv.reader(f, delimiter='\t'))
+
+    resultado = []
+
+    for row in rows:
+        letra = row[0]
+        col_4_count = len(row[3].split(","))
+        col_5_count = len(row[4].split(","))
+        resultado.append((letra, col_4_count, col_5_count))
+
+    return resultado
+
     """
     Retorne una lista de tuplas contengan por cada tupla, la letra de la
     columna 1 y la cantidad de elementos de las columnas 4 y 5.

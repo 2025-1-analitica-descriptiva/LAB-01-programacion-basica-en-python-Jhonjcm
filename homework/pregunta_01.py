@@ -8,24 +8,18 @@ utilizar pandas, numpy o scipy.
 import csv
 import os
 
-def leer_csv():
-    ruta = os.path.join(os.path.dirname(__file__), "..","files","input", "data.csv")
-    with open(ruta, newline='', encoding='utf-8') as archivo:
-        lector = list(csv.reader(archivo, delimiter='\t'))
-    return lector
-
-
 
 def pregunta_01():
-    suma = 0
-    fila = leer_csv()
-    for fila in filas:
-        suma += int(fila[1])
-    return suma
+    base_path = os.path.dirname(os.path.dirname(__file__))
+    full_path = os.path.join(base_path, "files", "input", "data.csv")
 
-# Uso correcto:
-filas = leer_csv()
-print(pregunta_01())
+    with open(full_path, newline='', encoding='utf-8') as archivo:
+        lector = csv.reader(archivo, delimiter='\t')
+        suma = 0
+        for fila in lector:
+            suma += int(fila[1])
+
+    return suma
 
     
 """
